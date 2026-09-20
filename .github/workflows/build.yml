@@ -30,17 +30,18 @@ jobs:
       - name: Build with Gradle
         run: |
           chmod +x ./gradlew
-          ./gradlew build
+          ./gradlew clean
+          ./gradlew remapJar
 
       - name: Check Build Output
         run: |
           echo "Searching generated jars..."
-          find . -name "*.jar" -type f || true
+          find . -name "*.jar" -type f
           echo "Searching build/libs..."
-          find . -type d -name libs || true
+          find . -type d -name libs
 
       - name: Upload Artifacts to GitHub
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # 7.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f
         with:
           name: Artifacts
           path: |
